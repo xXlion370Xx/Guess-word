@@ -1,4 +1,4 @@
-#Set up project
+# Set up project
 
 ## On windows
 ´´´SH

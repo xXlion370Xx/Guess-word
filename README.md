@@ -1,26 +1,26 @@
 # Set up project
 
 ## On windows
-´´´SH
+```sh
 python -m venv env
-´´´
+```
 
-´´´SH
+```SH
 ./env/Scripts/Activate
-´´´
+```
 
 ## WSL
-´´´SH
+```SH
 python -m venv env
-´´´
+```
 
-´´´SH
+```SH
 source env/bin/activate
-´´´
+```
 
 
 ------------------------
 
-´´´SH
+```SH
 pip install -r requirements.txt
-´´´
+```

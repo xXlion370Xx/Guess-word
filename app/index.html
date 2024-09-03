@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WebSocket Test</title>
+</head>
+<body>
+    <h1>WebSocket Test</h1>
+    <input type="text" id="messageInput" placeholder="Escribe un mensaje...">
+    <button onclick="sendMessage()">Enviar</button>
+    <ul id="messages"></ul>
+
+    <script>
+        const ws = new WebSocket("ws://127.0.0.1:8000/ws");
+
+        ws.onmessage = function(event) {
+            const messages = document.getElementById('messages');
+            const message = document.createElement('li');
+            message.textContent = event.data;
+            messages.appendChild(message);
+        };
+
+        function sendMessage() {
+            const input = document.getElementById("messageInput");
+            ws.send(input.value);
+            input.value = '';
+        }
+    </script>
+</body>
+</html>

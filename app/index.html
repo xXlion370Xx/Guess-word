@@ -10,7 +10,8 @@
     
     <label for="roomId">ID de la Sala:</label>
     <input type="text" id="roomId" placeholder="Ingrese el ID de la sala">
-    
+    <input type="text" id="user" placeholder="Ingrese name">
+
     <!-- Botón para conectar -->
     <button onclick="connectWebSocket()">Conectar</button>
     
@@ -26,13 +27,15 @@
         // Función para conectar al WebSocket
         function connectWebSocket() {
             const roomId = document.getElementById('roomId').value;
+            const user = document.getElementById('user').value;
+            console.log(user)
             if (!roomId) {
                 alert("Por favor, ingrese un ID de sala válido.");
                 return;
             }
 
             // URL del servidor WebSocket
-            const url = `ws://127.0.0.1:8000/ws/${roomId}`;
+            const url = `ws://127.0.0.1:8000/ws/${roomId}/${user}`;
             socket = new WebSocket(url);
 
             // Evento de apertura de conexión

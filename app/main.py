@@ -42,14 +42,14 @@ async def create_room():
     valid_rooms[room_id] = []  
     return {"room_id": room_id}
 
-@app.websocket("/ws/{room_id}")
-async def websocket_endpoint(websocket: WebSocket, room_id: str):
+@app.websocket("/ws/{room_id}/{user}")
+async def websocket_endpoint(websocket: WebSocket, room_id: str,user:str ):
     await manager.connect(websocket, room_id)
     try:
         while True:
             data = await websocket.receive_text()
             if room_id in valid_rooms:
-                await manager.send_message(room_id, f"Mensaje en sala {room_id}: {data}")
+                await manager.send_message(room_id, f"Mensaje en sala {user}: {data}")
             else:
                 await websocket.send_text("ID de sala no válido.")
     except WebSocketDisconnect:

@@ -16,13 +16,13 @@ async def create_room_id():
     print(ObjConnectWS.room_connections)
     return {"room_id" : room_id}
 
-@app.websocket("/ws/{room_id}")
-async def websocket_endpoint(websocket: WebSocket, room_id: str):
+@app.websocket("/ws/{room_id}/{user}")
+async def websocket_endpoint(websocket: WebSocket, room_id: str, user:str ):
     await ObjConnectWS.connect(websocket, room_id)
     try:
         while True:
             data = await websocket.receive_text()
-            await ObjConnectWS.send_message(room_id, f"Mensaje en sala {room_id}: {data}")
+            await ObjConnectWS.send_message(room_id, f"Mensaje en sala {user}: {data}")
             
     except WebSocketDisconnect:
         ObjConnectWS.disconnect(websocket, room_id)

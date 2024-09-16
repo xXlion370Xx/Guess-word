@@ -1,7 +1,7 @@
 from pydantic import BaseModel, Field
 from typing import Optional
 
-class UserModel(BaseModel):
+class CreateModel(BaseModel):
     nickname :  str
     owner     :  Optional[bool] = Field(default=True) 
 

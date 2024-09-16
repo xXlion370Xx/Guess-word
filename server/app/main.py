@@ -1,7 +1,7 @@
 from fastapi import FastAPI, WebSocket, WebSocketDisconnect, Body
 from fastapi.responses import JSONResponse
 from services import ConnectionWebSocketManager, CodeGeneratorManager
-from schemas.user_schema import UserModel
+from schemas.user_schema import CreateModel
 
 app = FastAPI()
 
@@ -11,7 +11,7 @@ ObjCodeGen = CodeGeneratorManager.CodeGeneratorManager()
 
 # Ruta para crear una nueva sala
 @app.post("/create_room_id", tags=['Crear'])
-async def create_room_id(user_schema: UserModel):
+async def create_room_id(user_schema: CreateModel):
     room_id = ObjCodeGen.gen_random_code()
     ObjConnectWS.room_connections = {room_id: []}
     
@@ -20,11 +20,17 @@ async def create_room_id(user_schema: UserModel):
 
 @app.websocket("/ws/{room_id}/{user}")
 async def websocket_endpoint(websocket: WebSocket, room_id: str, user:str ):
-    await ObjConnectWS.connect(websocket, room_id)
+    await ObjConnectWS.connect(websocket, room_id, user)
+    
     try:
         while True:
-            data = await websocket.receive_text()
-            await ObjConnectWS.send_message(room_id, f"Mensaje en sala {user}: {data}")
-            
+            try:
+
+                data = await websocket.receive_text()
+                await ObjConnectWS.send_message(room_id, f"Mensaje en sala {user}: {data}")
+
+            except WebSocketDisconnect:
+                print(f"Ninckname {user} disconnected from room {room_id}")
+                break
     except WebSocketDisconnect:
         ObjConnectWS.disconnect(websocket, room_id)

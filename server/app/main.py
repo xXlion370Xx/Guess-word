@@ -1,5 +1,7 @@
-from fastapi import FastAPI, WebSocket, WebSocketDisconnect
+from fastapi import FastAPI, WebSocket, WebSocketDisconnect, Body
+from fastapi.responses import JSONResponse
 from services import ConnectionWebSocketManager, CodeGeneratorManager
+from schemas.user_schema import UserModel
 
 app = FastAPI()
 
@@ -8,13 +10,13 @@ ObjCodeGen = CodeGeneratorManager.CodeGeneratorManager()
 
 
 # Ruta para crear una nueva sala
-@app.post("/create_room_id")
-async def create_room_id():
+@app.post("/create_room_id", tags=['Crear'])
+async def create_room_id(user_schema: UserModel):
     room_id = ObjCodeGen.gen_random_code()
     ObjConnectWS.room_connections = {room_id: []}
     
     print(ObjConnectWS.room_connections)
-    return {"room_id" : room_id}
+    return JSONResponse(status_code=200, content={"status" : 200, "user_name": user_schema.nickname, "owner": user_schema.owner, "room_id": room_id})
 
 @app.websocket("/ws/{room_id}/{user}")
 async def websocket_endpoint(websocket: WebSocket, room_id: str, user:str ):

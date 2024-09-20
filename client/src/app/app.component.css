@@ -1,0 +1,11 @@
+.form {
+    width: 65vw;
+    height: 70vh;
+    margin: 5% auto;
+    display: flex;
+    background-color: red;
+}
+
+.items {
+    flex: 1;
+}

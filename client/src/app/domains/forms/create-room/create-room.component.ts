@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
+import { CreateRoomService } from '../../../services/create-room.service';
 
 @Component({
   selector: 'app-create-room',
@@ -8,5 +9,14 @@ import { Component } from '@angular/core';
   styleUrl: './create-room.component.css'
 })
 export class CreateRoomComponent {
+  private createRoomService = inject(CreateRoomService)
+  roomId = ""
+  createRoom() {
+    return this.createRoomService.createRoom();
+  }
+
+  const roomId = this.createRoom();
+
+  console.log(roomId);
 
 }

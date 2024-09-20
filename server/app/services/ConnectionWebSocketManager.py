@@ -11,7 +11,7 @@ class ConnectionWebSocketManager:
     async def connect(self, websocket: WebSocket, room_id: str, nickname: str):
         if room_id not in self._room_connections:
             await websocket.close(code=1008)
-            return JSONResponse(status_code=400, content={"status_code": 200, "room_exist": False, "nickname": nickname, "room_id": room_id })
+            return JSONResponse(status_code=400, content={"status_code": 400, "room_exist": False, "nickname": nickname, "room_id": room_id })
         await websocket.accept()
         self.active_connections.append(websocket)
         self._room_connections[room_id].append(websocket)

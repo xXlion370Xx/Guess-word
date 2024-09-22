@@ -2,9 +2,16 @@
     <h2>Crear Sala</h2>
     <div class="form-container">
         <form>
-            <input type="text" id="apodo" name="apodo" placeholder="Introduce tu apodo" required>
+            <input type="text" id="nickName" name="nickName" placeholder="Introduce tu apodo"
+                [formControl]="nickNameControl()" required>
             <br>
-            <button (click)="createRoom()" type="submit">Crear Sala</button>
+            <div (click)="createRoom($event)">
+                <p>Enviar</p>
+            </div>
         </form>
     </div>
 </div>
+
+<pre>
+    {{ nickNameControl().value}}
+</pre>

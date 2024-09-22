@@ -1,18 +1,21 @@
 import { inject, Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 @Injectable({
   providedIn: 'root'
 })
 export class CreateRoomService {
   private http = inject(HttpClient);
-
   constructor() { }
 
-  createRoom() {
-    let url = "";
-    if (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1') {
-      url = "http://localhost:4200/create_room_id";
+
+
+  createRoom(nickName: string) {
+    const url = "http://localhost:8000/create_room_id";
+    const body = {
+      "nickname": nickName
     }
-    return this.http.post(url, {});
+
+    const headers = new HttpHeaders({ 'Content-Type': 'application/json' })
+    return this.http.post(url, body, { headers });
   }
 }

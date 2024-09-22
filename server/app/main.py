@@ -2,8 +2,21 @@ from fastapi import FastAPI, WebSocket, WebSocketDisconnect, Body
 from fastapi.responses import JSONResponse
 from services import ConnectionWebSocketManager, CodeGeneratorManager
 from schemas.user_schema import CreateModel
+from fastapi.middleware.cors import CORSMiddleware
 
 app = FastAPI()
+
+origins = [
+    "*"
+]
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=origins,
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 
 ObjConnectWS = ConnectionWebSocketManager.ConnectionWebSocketManager({})
 ObjCodeGen = CodeGeneratorManager.CodeGeneratorManager()

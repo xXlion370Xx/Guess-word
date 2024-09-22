@@ -1,6 +1,7 @@
 import { Component, inject, signal } from '@angular/core';
 import { CreateRoomService } from '../../../services/create-room.service';
 import { FormControl, ReactiveFormsModule, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-create-room',
@@ -11,22 +12,22 @@ import { FormControl, ReactiveFormsModule, Validators } from '@angular/forms';
 })
 export class CreateRoomComponent {
   private createRoomService = inject(CreateRoomService);
-  roomId = signal<any>(null);
+  private router = inject(Router);
   nickNameControl = signal(new FormControl('', {
     nonNullable: true,
     validators: [Validators.required]
   }))
 
-  createRoom(event: any) {
+  createRoom() {
     this.createRoomService.createRoom(this.nickNameControl().value).subscribe({
-      next: (response) => {
-        console.log(response);
-      },
-      error: (error) => {
-        console.log("Algo salio mal");
-        console.log(error);
-      }
+      next: (res) => {
+        console.log(res.owner);
 
+        this.router.navigate(['game', res.room_id])
+      },
+      error: (err) => {
+        console.log("Something went wrong");
+      }
     })
   }
 }

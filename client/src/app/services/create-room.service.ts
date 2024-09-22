@@ -1,5 +1,6 @@
 import { inject, Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { createRoomResponse } from '../model/CreateRoomResponse';
 @Injectable({
   providedIn: 'root'
 })
@@ -16,6 +17,6 @@ export class CreateRoomService {
     }
 
     const headers = new HttpHeaders({ 'Content-Type': 'application/json' })
-    return this.http.post(url, body, { headers });
+    return this.http.post<createRoomResponse>(url, body, { headers });
   }
 }

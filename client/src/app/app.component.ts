@@ -7,14 +7,10 @@ import { JoinRoomComponent } from './domains/forms/join-room/join-room.component
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet, CreateRoomComponent, JoinRoomComponent],
+  imports: [RouterOutlet],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })
 export class AppComponent {
-  title = inject(Title)
 
-  ngOnInit() {
-    this.title.setTitle("Guess Word")
-  }
 }

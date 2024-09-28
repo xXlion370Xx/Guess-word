@@ -1,0 +1,19 @@
+.chat-container {
+    width: 100%;
+    height: 100%;
+    background-color: purple;
+    justify-content: space-between;
+    display: flex;
+    flex-direction: column;
+}
+
+.messages {
+    width: 100%;
+    background-color: aquamarine;
+}
+
+.messages-container {
+    background-color: brown;
+    display: flex;
+    justify-content: center;
+}

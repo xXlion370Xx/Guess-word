@@ -1,2 +1,6 @@
-<p>You're now playing on this roomid</p>
-{{roomid}}
+<div class="container">
+    <app-person-list class="person-list"></app-person-list>
+    <app-game-chat class="game-chat" [userInfo]="userInfo" [webSocket]="socket"
+        [class.toogle-chat]="showChat == false"></app-game-chat>
+</div>
+{{userInfo?.room_id}}

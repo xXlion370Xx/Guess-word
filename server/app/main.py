@@ -39,7 +39,7 @@ async def websocket_endpoint(websocket: WebSocket, room_id: str, user:str ):
             try:
 
                 data = await websocket.receive_text()
-                await ObjConnectWS.send_message(room_id, f"Mensaje en sala {user}: {data}")
+                await ObjConnectWS.send_message(user, data, room_id)
 
             except WebSocketDisconnect:
                 print(f"Ninckname {user} disconnected from room {room_id}")

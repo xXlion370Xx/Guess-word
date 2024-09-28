@@ -1,0 +1,23 @@
+.container {
+    display: flex;
+    justify-content: start;
+    margin-top: 30px;
+    width: 100%;
+    /* background-color: aqua; */
+    height: 600px;
+}
+
+.person-list {
+    background-color: blue;
+    width: 20%;
+}
+
+.game-chat {
+    background-color: orange;
+    width: 65%;
+    display: none;
+}
+
+.toogle-chat {
+    display: block;
+}

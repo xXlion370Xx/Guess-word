@@ -1,0 +1,15 @@
+<div class="chat-container">
+    <p>Esta es la info tuya UwU</p>
+    {{userInfo?.user_name}}
+    <div class="messages chat-items">
+        @for (item of messages(); track $index) {
+        <p>{{item.userName}}:</p><br>
+        <p>{{item.messsage}}</p>
+        }
+    </div>
+    <div class="messages-container">
+        <input [formControl]="messageInputControl" required class="chat-items" type="text"
+            placeholder="Escribe un mensaje">
+        <button (click)="sendMessage()" class="chat-items">Enviar mensaje</button>
+    </div>
+</div>

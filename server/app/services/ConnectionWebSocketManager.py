@@ -1,3 +1,4 @@
+import json
 from fastapi import WebSocket
 from fastapi.responses import JSONResponse
 from typing import List
@@ -25,11 +26,11 @@ class ConnectionWebSocketManager:
         if room_id in self._room_connections:
             self._room_connections[room_id].remove(websocket)
 
-    async def send_message(self, room_id: str, message: str):
+    async def send_message(self, user_name: str, message: str, room_id: str):
         if room_id in self._room_connections:
             print(self._room_connections[room_id])
             for connection in self._room_connections[room_id]:
-                await connection.send_text(message)
+                await connection.send_text(json.dumps({"user_name": user_name, "message": message}))
                 
     @property
     def room_connections(self):

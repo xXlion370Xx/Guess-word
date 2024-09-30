@@ -1,12 +1,11 @@
 <div class="container-create-room">
-    <h2>Crear Sala</h2>
+    <h2>Crear una sala</h2>
     <div class="form-container">
-        <form>
-            <input type="text" id="nickName" name="nickName" placeholder="Introduce tu apodo"
-                [formControl]="nickNameControl()" required>
-            <br>
-            <div (click)="createRoom()">
-                <p>Enviar</p>
+        <form class="form">
+            <input (keydown.enter)="createRoom($event)" type="text" id="nickName" name="nickName"
+                placeholder="Introduce tu apodo" [formControl]="nickNameControl()" required>
+            <div class="button-form-container" (click)="createRoom($event)">
+                <p>¡Crear Sala!</p>
             </div>
         </form>
     </div>

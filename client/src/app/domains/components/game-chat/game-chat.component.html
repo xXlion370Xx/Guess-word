@@ -1,15 +1,23 @@
 <div class="chat-container">
-    <p>Esta es la info tuya UwU</p>
-    {{userInfo?.user_name}}
-    <div class="messages chat-items">
-        @for (item of messages(); track $index) {
-        <p>{{item.userName}}:</p><br>
-        <p>{{item.messsage}}</p>
-        }
-    </div>
+    <h2>Palabra random para adivinar</h2>
     <div class="messages-container">
-        <input [formControl]="messageInputControl" required class="chat-items" type="text"
+        <div class="message-item">
+            <p class="user-name">Persona1 :</p><br>
+            <p class="user-message">Mensaje</p>
+        </div>
+    </div>
+    @for (item of messages(); track $index) {
+    <div class="messages-container">
+        <div class="message-item">
+            <p class="user-name">{{item.userName}} :</p><br>
+            <p>{{item.messsage}}</p>
+        </div>
+    </div>
+    }
+
+    <div class="form-messages-container">
+        <input [formControl]="messageInputControl" required class="input-message" type="text"
             placeholder="Escribe un mensaje">
-        <button (click)="sendMessage()" class="chat-items">Enviar mensaje</button>
+        <button (click)="sendMessage()" class="button-send-message">Enviar</button>
     </div>
 </div>

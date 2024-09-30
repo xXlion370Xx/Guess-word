@@ -4,7 +4,7 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    background-color: brown;
+    /* background-color: brown; */
     box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
 }
 
@@ -24,15 +24,16 @@ input {
     border: 1px solid #ccc;
 }
 
-button {
-    padding: 10px;
-    background-color: #4CAF50;
-    color: white;
+.button-join-room {
+    font-family: "Fredoka", sans-serif;
+    font-size: 1rem;
     border: none;
-    border-radius: 4px;
-    cursor: pointer;
-}
-
-button:hover {
-    background-color: #45a049;
+    background-color: #43cea2;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 40px;
+    width: 60%;
+    border-radius: 15px;
+    align-self: center;
 }

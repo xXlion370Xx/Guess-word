@@ -20,7 +20,7 @@ export class CreateRoomComponent {
     validators: [Validators.required]
   }))
 
-  createRoom() {
+  createRoom(event: Event) {
     this.createRoomService.createRoom(this.nickNameControl().value).subscribe({
       next: (res) => {
         this.storeDataService.updateRoomData(res);
@@ -31,5 +31,7 @@ export class CreateRoomComponent {
         console.log(err);
       }
     })
+
+    event.preventDefault();
   }
 }

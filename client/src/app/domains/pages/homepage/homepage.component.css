@@ -3,7 +3,8 @@
     height: 70vh;
     margin: 5% auto;
     display: flex;
-    background-color: red;
+    background-color: #e0f7ef;
+    border-radius: 15px;
 }
 
 .items {

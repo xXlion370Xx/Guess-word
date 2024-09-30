@@ -4,7 +4,7 @@
     justify-content: center;
     align-items: center;
     flex-direction: column;
-    background-color: blue;
+    /* background-color: blue; */
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
@@ -12,21 +12,29 @@
     text-align: center;
 }
 
-input,
-button {
+input {
     padding: 10px;
     margin: 10px 0;
     border-radius: 5px;
     border: 1px solid #ccc;
 }
 
-button {
-    background-color: #28a745;
-    color: white;
-    border: none;
-    cursor: pointer;
+.form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
-button:hover {
-    background-color: #218838;
+.button-form-container {
+    background-color: #43cea2;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 40px;
+    width: 60%;
+    border-radius: 15px;
+}
+
+.button-form-container:hover {
+    cursor: pointer;
 }

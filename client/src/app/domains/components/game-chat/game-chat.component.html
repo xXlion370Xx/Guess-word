@@ -1,4 +1,8 @@
 <div class="chat-container">
+    <p>Tu nombre:</p>
+    {{userInfo?.user_name}}
+    <p>ID SALA:</p>
+    {{userInfo?.room_id}}
     <h2>Palabra random para adivinar</h2>
     <div class="messages-container">
         <div class="message-item">
@@ -16,8 +20,8 @@
     }
 
     <div class="form-messages-container">
-        <input [formControl]="messageInputControl" required class="input-message" type="text"
-            placeholder="Escribe un mensaje">
+        <input [formControl]="messageInputControl" (keydown.enter)="sendMessage()" required class="input-message"
+            type="text" placeholder="Escribe un mensaje">
         <button (click)="sendMessage()" class="button-send-message">Enviar</button>
     </div>
 </div>

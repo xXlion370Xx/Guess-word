@@ -14,36 +14,13 @@ import { StoreDataService } from '../../../services/store-data.service';
   styleUrl: './game-room.component.css'
 })
 export class GameRoomComponent {
-  private route = inject(ActivatedRoute);
-  private webSocketServices = inject(WebsocketService);
   private storeService = inject(StoreDataService)
   userInfo: createRoomResponse | null = null;
   showChat = false
-  socket: WebSocket | null = null;
-  mensajeDesdeElPadre = "Hola vengo desde le padre"
-
 
   ngOnInit() {
-    console.log(this.userInfo);
     this.storeService.currentRoomData.subscribe((data) => {
       this.userInfo = data;
     })
-    console.log(this.userInfo);
-
-    if (this.userInfo) {
-      this.socket = this.webSocketServices.connectWS(this.userInfo.room_id, this.userInfo.user_name)
-
-      this.socket.onopen = (e) => {
-        console.log("Conectado mi rey");
-      }
-
-      this.socket.onclose = (e) => {
-        console.log("WebSocket cerrado");
-      }
-
-      this.socket.onerror = (e) => {
-        console.log(`Algo paso {e}`);
-      }
-    }
   }
 }

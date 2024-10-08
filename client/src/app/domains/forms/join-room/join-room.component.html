@@ -2,11 +2,11 @@
     <h1>Unirse a sala</h1>
     <form>
         <label for="apodo">Apodo:</label>
-        <input type="text" id="apodo" name="apodo" placeholder="Introduce tu apodo" required>
+        <input [formControl]="nickName()" type="text" id="apodo" name="apodo" placeholder="Introduce tu apodo" required>
 
         <label for="codigo">Código:</label>
-        <input type="text" id="codigo" name="codigo" placeholder="Introduce un código" required>
+        <input [formControl]="code()" type="text" id="codigo" name="codigo" placeholder="Introduce un código" required>
 
-        <button class="button-join-room" type="submit">Unirse</button>
+        <button class="button-join-room" type="submit" (click)="joinRoom($event)">Unirse</button>
     </form>
 </div>

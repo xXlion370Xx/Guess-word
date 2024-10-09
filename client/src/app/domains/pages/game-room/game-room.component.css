@@ -1,28 +1,31 @@
 .container {
+    width: 100%;
+    height: 100vh;
     display: flex;
-    justify-content: start;
-    gap: 20px;
-    margin: 30px auto;
-    width: 90%;
-    height: 90vh;
-    /* background-color: aqua; */
-    border-radius: 15px;
+    justify-content: center;
+    align-items: center;
+}
+
+.content-container {
+    /* background-color: red; */
+    width: 85%;
+    height: 95%;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    gap: 10px;
 }
 
 .person-list {
     background-color: #e0f7ef;
-    width: 20%;
+    width: 30%;
+    height: 100%;
     border-radius: 15px;
 }
 
 .game-chat {
     background-color: #e0f7ef;
-    width: 65%;
+    height: 100%;
     border-radius: 15px;
-    padding: 10px;
-    display: none;
-}
-
-.toogle-chat {
-    display: block;
+    flex-grow: 1;
 }

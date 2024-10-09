@@ -1,23 +1,41 @@
 <div class="chat-container">
-    <p>Tu nombre:</p>
-    {{userInfo?.user_name}}
-    <p>ID SALA:</p>
-    {{userInfo?.room_id}}
-    <h2>Palabra random para adivinar</h2>
-    <div class="messages-container">
+    <div class="user-info">
+        <p>Tu nombre:</p>
+        {{userInfo?.user_name}}
+        <p>ID SALA:</p>
+        {{userInfo?.room_id}}
+        <h2>Palabra random para adivinar</h2>
+    </div>
+    <!-- <div class="messages-container">
         <div class="message-item">
+            <p class="user-name">Persona2 :</p><br>
+            <p class="user-message">Mensaje</p>
+        </div>
+        <div class="message-item server-message">
             <p class="user-name">Persona1 :</p><br>
             <p class="user-message">Mensaje</p>
         </div>
-    </div>
-    @for (item of messages(); track $index) {
-    <div class="messages-container">
         <div class="message-item">
+            <p class="user-name">Persona2 :</p><br>
+            <p class="user-message">Mensaje</p>
+        </div>
+        <div class="message-item server-message">
+            <p class="user-name">Persona1 :</p><br>
+            <p class="user-message">Mensaje</p>
+        </div>
+        <div class="message-item">
+            <p class="user-name">Persona2 :</p><br>
+            <p class="user-message">Mensaje</p>
+        </div>
+    </div> -->
+    <div class="messages-container">
+        @for (item of messages(); track $index) {
+        <div class="message-item" [class.server-message]="userInfo?.user_name !== item.userName">
             <p class="user-name">{{item.userName}} :</p><br>
             <p>{{item.messsage}}</p>
         </div>
+        }
     </div>
-    }
 
     <div class="form-messages-container">
         <input [formControl]="messageInputControl" (keydown.enter)="sendMessage()" required class="input-message"

@@ -40,11 +40,14 @@ export class GameChatComponent {
       // Evento de recepción de mensaje
       this.socket.onmessage = (event) => {
         console.log("Receiving message");
+        console.log(event.data);
 
-        const data = JSON.parse(event.data);
+        const reqMessage = JSON.parse(event.data);
+        console.log(reqMessage);
         const newMessage: messageModel = {
-          "userName": data.user_name,
-          "messsage": data.message
+          "userName": reqMessage.user_name,
+          "messsage": reqMessage.message,
+          "owner": false
         }
 
         this.updateMessages(newMessage);
@@ -66,10 +69,7 @@ export class GameChatComponent {
 
   sendMessage() {
     if (this.socket) {
-      this.socket?.send(this.messageInputControl.value)
+      this.socket?.send(this.messageInputControl.value);
     }
   }
-
-
-
 }

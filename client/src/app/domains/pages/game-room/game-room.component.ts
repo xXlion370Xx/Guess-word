@@ -16,7 +16,6 @@ import { StoreDataService } from '../../../services/store-data.service';
 export class GameRoomComponent {
   private storeService = inject(StoreDataService)
   userInfo: createRoomResponse | null = null;
-  showChat = false
 
   ngOnInit() {
     this.storeService.currentRoomData.subscribe((data) => {

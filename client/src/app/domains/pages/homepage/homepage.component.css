@@ -1,0 +1,12 @@
+.form {
+    width: 65vw;
+    height: 70vh;
+    margin: 5% auto;
+    display: flex;
+    background-color: #e0f7ef;
+    border-radius: 15px;
+}
+
+.items {
+    flex: 1;
+}

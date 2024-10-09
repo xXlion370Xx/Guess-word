@@ -1,0 +1,39 @@
+.container-join-room {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    /* background-color: brown; */
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+}
+
+h1 {
+    text-align: center;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+}
+
+input {
+    margin: 10px 0;
+    padding: 10px;
+    border-radius: 4px;
+    border: 1px solid #ccc;
+}
+
+.button-join-room {
+    font-family: "Fredoka", sans-serif;
+    font-size: 1rem;
+    border: none;
+    background-color: #43cea2;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 40px;
+    width: 60%;
+    border-radius: 15px;
+    align-self: center;
+}

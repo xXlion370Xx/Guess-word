@@ -1,0 +1,40 @@
+.container-create-room {
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    /* background-color: blue; */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.form-container {
+    text-align: center;
+}
+
+input {
+    padding: 10px;
+    margin: 10px 0;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+}
+
+.form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.button-form-container {
+    background-color: #43cea2;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 40px;
+    width: 60%;
+    border-radius: 15px;
+}
+
+.button-form-container:hover {
+    cursor: pointer;
+}

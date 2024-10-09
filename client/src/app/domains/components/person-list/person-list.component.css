@@ -1,0 +1,16 @@
+h2 {
+    margin-top: 10px;
+}
+
+.person-list-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.person-list {
+    /* background-color: blue; */
+    align-self: baseline;
+    margin-left: 15%;
+    margin-top: 10%;
+}

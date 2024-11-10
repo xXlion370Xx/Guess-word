@@ -10,7 +10,12 @@ export class StoreDataService {
   currentRoomData = this.roomDataSource.asObservable();
   constructor() { }
 
+  // BehaviorSubject para el estado de error
+  private errorSource = new BehaviorSubject<string | null>(null);
+  currentError = this.errorSource.asObservable();
+
   updateRoomData(roomData: createRoomResponse) {
     this.roomDataSource.next(roomData)
   }
+
 }

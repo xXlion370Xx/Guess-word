@@ -1,12 +1,21 @@
 <div class="container-create-room">
-    <h2>Crear una sala</h2>
-    <div class="form-container">
-        <form class="form">
-            <input (keydown.enter)="createRoom($event)" type="text" id="nickName" name="nickName"
-                placeholder="Introduce tu apodo" [formControl]="nickNameControl()" required>
-            <div class="button-form-container" (click)="createRoom($event)">
-                <p>¡Crear Sala!</p>
-            </div>
-        </form>
-    </div>
+  <h2>Crear una sala</h2>
+  <div class="form-container">
+    <form class="form">
+      <input (keydown.enter)="createRoom($event)" type="text" id="nickName" name="nickName"
+        placeholder="Introduce tu apodo" [formControl]="nickNameControl()" required>
+      @if (nickNameControl().invalid && nickNameControl().touched) {
+        <div>
+          @if (nickNameControl().hasError('required')) {
+            <small>
+              El apodo es obligatorio.
+            </small>
+          }
+        </div>
+      }
+      <div class="button-form-container" (click)="createRoom($event)">
+        <p>¡Crear Sala!</p>
+      </div>
+    </form>
+  </div>
 </div>

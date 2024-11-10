@@ -3,11 +3,12 @@ import { CreateRoomService } from '../../../services/create-room.service';
 import { FormControl, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { StoreDataService } from '../../../services/store-data.service';
+  // Importa el CommonModule
 
 @Component({
   selector: 'app-create-room',
   standalone: true,
-  imports: [ReactiveFormsModule],
+  imports: [ReactiveFormsModule],  // Añade CommonModule aquí
   templateUrl: './create-room.component.html',
   styleUrl: './create-room.component.css'
 })
@@ -21,17 +22,22 @@ export class CreateRoomComponent {
   }))
 
   createRoom(event: Event) {
+    event.preventDefault();
+
+    if (this.nickNameControl().invalid) {
+      this.nickNameControl().markAsTouched();
+      return;
+    }
+
     this.createRoomService.createRoom(this.nickNameControl().value).subscribe({
       next: (res) => {
         this.storeDataService.updateRoomData(res);
-        this.router.navigate(['game', res.room_id])
+        this.router.navigate(['game', res.room_id]);
       },
       error: (err) => {
         console.log("Something went wrong");
         console.log(err);
       }
-    })
-
-    event.preventDefault();
+    });
   }
-}
+}  

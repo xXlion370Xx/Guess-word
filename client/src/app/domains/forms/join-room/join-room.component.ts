@@ -2,6 +2,7 @@ import { Component, inject, signal } from '@angular/core';
 import { FormControl, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { StoreDataService } from '../../../services/store-data.service';
+import { WebsocketService } from '../../../services/websocket.service';
 import { createRoomResponse } from '../../../model/CreateRoomResponse';
 // Importa CommonModule
 
@@ -15,6 +16,9 @@ import { createRoomResponse } from '../../../model/CreateRoomResponse';
 export class JoinRoomComponent {
   private router = inject(Router);
   private storeDataService = inject(StoreDataService);
+  private websocketService = inject(WebsocketService);
+  invalidCodeMessage = false;
+
   userInfo: createRoomResponse | null = null;
 
   nickName = signal(new FormControl('', {
@@ -24,7 +28,7 @@ export class JoinRoomComponent {
 
   code = signal(new FormControl('', {
     nonNullable: true,
-    validators: [Validators.required, Validators.minLength(4)]
+    validators: [Validators.required]
   }));
 
 
@@ -39,16 +43,37 @@ export class JoinRoomComponent {
     }
 
 
-    this.userInfo = {
-      status: 200,
-      user_name: this.nickName().value,
-      owner: false,
-      room_id: this.code().value
-    };
 
 
-    this.storeDataService.updateRoomData(this.userInfo);
-    this.router.navigate(['game', this.code().value]);
+    this.websocketService.validateWs().subscribe({
+      next: (res) => {
+
+        // Especificamos que es un objeto que tiene un propiedad de tipo string[]
+        const activeRooms = (res as { active_rooms: string[] }).active_rooms;
+
+        this.userInfo = {
+          status: 200,
+          user_name: this.nickName().value,
+          owner: false,
+          room_id: this.code().value
+        };
+
+        // Verifica si el código está en active_rooms
+        if (activeRooms.includes(this.code().value)) {
+          this.storeDataService.updateRoomData(this.userInfo);
+          this.router.navigate(['game', this.code().value]);
+        } else {
+          this.invalidCodeMessage = true;
+        }
+
+      },
+      error: (err) => {
+        console.log("Something went wrong");
+        console.log(err);
+      }
+    });
+
+
 
   }
 }

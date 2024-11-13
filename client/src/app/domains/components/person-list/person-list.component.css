@@ -14,3 +14,10 @@ h2 {
     margin-left: 15%;
     margin-top: 10%;
 }
+
+.info-list {
+    /* background-color: blue; */
+    align-self: baseline;
+    margin-left: 15%;
+    margin-top: 10%;
+}

@@ -3,6 +3,7 @@ import { messageModel } from '../../../model/messageModel';
 import { createRoomResponse } from '../../../model/CreateRoomResponse';
 import { FormControl, ReactiveFormsModule, Validators } from '@angular/forms';
 import { WebsocketService } from '../../../services/websocket.service';
+import { Console } from 'console';
 
 @Component({
   selector: 'app-game-chat',
@@ -16,6 +17,7 @@ export class GameChatComponent {
   private webSocketService = inject(WebsocketService);
   socket: WebSocket | null = null;
   messages = signal<messageModel[]>([]);
+  word = '';
 
   messageInputControl = new FormControl('', {
     nonNullable: true,
@@ -29,7 +31,19 @@ export class GameChatComponent {
   ngOnInit() {
     if (this.userInfo) {
       this.socket = this.webSocketService.connectWS(this.userInfo.room_id, this.userInfo.user_name);
+
     }
+    this.webSocketService.getWord().subscribe({
+      next: (res) => {
+        this.word = res.random_word;
+      },
+      error: (err) => {
+        console.log("Something went wrong");
+        console.log(err);
+      }
+    });
+
+
 
     if (this.socket) {
       // Evento de apertura de conexión

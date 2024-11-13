@@ -4,3 +4,9 @@ export interface createRoomResponse {
     owner: boolean,
     room_id: string
 }
+
+export interface getRoomResponse {
+    status: number,
+    random_word: string
+
+}

@@ -7,13 +7,13 @@
 
     <!-- Mensaje de error para apodo -->
     @if (nickName().invalid && nickName().touched) {
-      <div>
-        @if (nickName().hasError('required')) {
-          <small>
-            El apodo es obligatorio.
-          </small>
-        }
-      </div>
+    <div>
+      @if (nickName().hasError('required')) {
+      <small>
+        El apodo es obligatorio.
+      </small>
+      }
+    </div>
     }
 
     <!-- Campo de código -->
@@ -22,14 +22,22 @@
 
     <!-- Mensaje de error para código -->
     @if (code().invalid && code().touched) {
-      <div>
-        @if (code().hasError('required')) {
-          <small>
-            El código es obligatorio.
-          </small>
-        }
-      </div>
+    <div>
+      @if (code().hasError('required')) {
+      <small>
+        El código es obligatorio, por favor validelo.
+      </small>
+      }
+
+
+    </div>
     }
+    @if (invalidCodeMessage) {
+    <small>
+      Codigo Invalido
+    </small>
+    }
+
 
     <!-- Botón para unirse a la sala -->
     <button class="button-join-room" type="submit">Unirse</button>

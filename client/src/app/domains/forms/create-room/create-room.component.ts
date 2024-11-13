@@ -3,7 +3,7 @@ import { CreateRoomService } from '../../../services/create-room.service';
 import { FormControl, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { StoreDataService } from '../../../services/store-data.service';
-  // Importa el CommonModule
+// Importa el CommonModule
 
 @Component({
   selector: 'app-create-room',
@@ -18,7 +18,9 @@ export class CreateRoomComponent {
   private storeDataService = inject(StoreDataService);
   nickNameControl = signal(new FormControl('', {
     nonNullable: true,
-    validators: [Validators.required]
+    validators: [Validators.required,
+    Validators.pattern(/^(?!\s*$).+/)
+    ]
   }))
 
   createRoom(event: Event) {
@@ -40,4 +42,6 @@ export class CreateRoomComponent {
       }
     });
   }
+
+
 }  

@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
+import { createRoomResponse } from '../../../model/CreateRoomResponse';
 
 @Component({
   selector: 'app-person-list',
@@ -8,5 +9,7 @@ import { Component } from '@angular/core';
   styleUrl: './person-list.component.css'
 })
 export class PersonListComponent {
+  @Input({ required: true }) userInfo: createRoomResponse | null = null;
+
   persons = ["persona 1", "persona 2", "persona 3", "persona 4"]
 }

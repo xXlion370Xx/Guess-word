@@ -31,13 +31,13 @@ async def create_room_id(user_schema: CreateModel):
     print(ObjConnectWS.room_connections)
     return JSONResponse(status_code=200, content={"status" : 200, "user_name": user_schema.nickname, "owner": user_schema.owner, "room_id": room_id})
 
+#Conexion al websocket
 @app.websocket("/ws/{room_id}/{user}")
 async def websocket_endpoint(websocket: WebSocket, room_id: str, user:str ):
     await ObjConnectWS.connect(websocket, room_id, user)
     try:
         while True:
             try:
-
                 data = await websocket.receive_text()
                 await ObjConnectWS.send_message(user, data, room_id)
 
@@ -47,9 +47,16 @@ async def websocket_endpoint(websocket: WebSocket, room_id: str, user:str ):
     except WebSocketDisconnect:
         ObjConnectWS.disconnect(websocket, room_id)
 
+# Generador palabra random
 @app.get('/random_word', tags=['Crear'])
 def gen_random_word():
     word = ObjCodeGen.gen_random_word()
 
     return JSONResponse(status_code=word[1], content={"status" : word[1], "random_word": word[0]})
 
+# Get lista de salas
+@app.get('/active_rooms', tags=['Consultar'])
+def get_rooms():
+    room = list(ObjConnectWS.room_connections)
+    
+    return JSONResponse(status_code=200, content={"active_rooms": room})

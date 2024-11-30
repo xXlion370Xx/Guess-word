@@ -1,0 +1,34 @@
+*{
+    text-align: center;
+}
+
+.canvas-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #e0f7ef;
+    border-radius: 15px;
+    width: 100%;
+    height: 100%;
+}
+  
+canvas {
+border: 2px solid #000;
+border-radius: 30px;
+cursor: crosshair;
+display: block;
+width: 100%;
+
+}
+
+.word{
+    font-size: 2rem; 
+    font-weight: bold; 
+    background: linear-gradient(to right, #43cea2, #185a9d); 
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text; 
+}
+
+
+  

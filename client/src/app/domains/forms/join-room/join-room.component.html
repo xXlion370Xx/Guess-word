@@ -1,46 +1,56 @@
 <div class="container-join-room">
+
+  @if (nickName().invalid && nickName().touched || code().invalid && code().touched ) {
+  <div style="margin: 10px;">
+    @if (nickName().hasError('required') || code().hasError('required')) {
+    <div class="info">
+      <div class="info__icon">
+        <svg fill="none" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+          <path
+            d="m12 1.5c-5.79844 0-10.5 4.70156-10.5 10.5 0 5.7984 4.70156 10.5 10.5 10.5 5.7984 0 10.5-4.7016 10.5-10.5 0-5.79844-4.7016-10.5-10.5-10.5zm.75 15.5625c0 .1031-.0844.1875-.1875.1875h-1.125c-.1031 0-.1875-.0844-.1875-.1875v-6.375c0-.1031.0844-.1875.1875-.1875h1.125c.1031 0 .1875.0844.1875.1875zm-.75-8.0625c-.2944-.00601-.5747-.12718-.7808-.3375-.206-.21032-.3215-.49305-.3215-.7875s.1155-.57718.3215-.7875c.2061-.21032.4864-.33149.7808-.3375.2944.00601.5747.12718.7808.3375.206.21032.3215.49305.3215.7875s-.1155.57718-.3215.7875c-.2061.21032-.4864.33149-.7808.3375z"
+            fill="#393a37"></path>
+        </svg>
+      </div>
+      <div class="info__title"> Los campos son obligatorios
+      </div>
+    </div>
+    }
+  </div>
+  }@else if (invalidCodeMessage) {
+  <div class="info">
+    <div class="info__icon">
+      <svg fill="none" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+        <path
+          d="m12 1.5c-5.79844 0-10.5 4.70156-10.5 10.5 0 5.7984 4.70156 10.5 10.5 10.5 5.7984 0 10.5-4.7016 10.5-10.5 0-5.79844-4.7016-10.5-10.5-10.5zm.75 15.5625c0 .1031-.0844.1875-.1875.1875h-1.125c-.1031 0-.1875-.0844-.1875-.1875v-6.375c0-.1031.0844-.1875.1875-.1875h1.125c.1031 0 .1875.0844.1875.1875zm-.75-8.0625c-.2944-.00601-.5747-.12718-.7808-.3375-.206-.21032-.3215-.49305-.3215-.7875s.1155-.57718.3215-.7875c.2061-.21032.4864-.33149.7808-.3375.2944.00601.5747.12718.7808.3375.206.21032.3215.49305.3215.7875s-.1155.57718-.3215.7875c-.2061.21032-.4864.33149-.7808.3375z"
+          fill="#393a37"></path>
+      </svg>
+    </div>
+    <div class="info__title">Codigo Invalido
+    </div>
+  </div>
+  }
+
+
   <h1>Unirse a sala</h1>
   <form (submit)="joinRoom($event)">
     <!-- Campo de apodo -->
     <label for="apodo">Apodo:</label>
-    <input [formControl]="nickName()" type="text" id="apodo" name="apodo" placeholder="Introduce tu apodo" required>
+    <input [formControl]="nickName()" type="text" id="apodo" class="input" placeholder="Introduce tu apodo" required>
 
     <!-- Mensaje de error para apodo -->
-    @if (nickName().invalid && nickName().touched) {
-    <div>
-      @if (nickName().hasError('required')) {
-      <small>
-        El apodo es obligatorio.
-      </small>
-      }
-    </div>
-    }
+
 
     <!-- Campo de código -->
     <label for="codigo">Código:</label>
-    <input [formControl]="code()" type="text" id="codigo" name="codigo" placeholder="Introduce un código" required>
-
-    <!-- Mensaje de error para código -->
-    @if (code().invalid && code().touched) {
-    <div>
-      @if (code().hasError('required')) {
-      <small>
-        El código es obligatorio, por favor validelo.
-      </small>
-      }
-
-
-    </div>
-    }
-    @if (invalidCodeMessage) {
-    <small>
-      Codigo Invalido
-    </small>
-    }
-
+    <input [formControl]="code()" type="text" id="codigo" class="input" placeholder="Introduce un código" required>
 
     <!-- Botón para unirse a la sala -->
-    <button class="button-join-room" type="submit">Unirse</button>
-
+    <button class="cta" type="submit">
+      <span>¡Unirse!</span>
+      <svg width="15px" height="10px" viewBox="0 0 13 10">
+        <path d="M1,5 L11,5"></path>
+        <polyline points="8 1 12 5 8 9"></polyline>
+      </svg>
+    </button>
   </form>
 </div>

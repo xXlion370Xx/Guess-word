@@ -1,29 +1,13 @@
+<button class="cta" type="submit" (click)="exit()">
+    <span>Salir!</span>
+    <svg width="15px" height="10px" viewBox="0 0 13 10">
+        <path d="M1,5 L11,5"></path>
+        <polyline points="8 1 12 5 8 9"></polyline>
+    </svg>
+</button>
 <div class="chat-container">
-    <h2>Palabra random para adivinar</h2>
-    <h2>{{word}}</h2>
 
-    <!-- <div class="messages-container">
-        <div class="message-item">
-            <p class="user-name">Persona2 :</p><br>
-            <p class="user-message">Mensaje</p>
-        </div>
-        <div class="message-item server-message">
-            <p class="user-name">Persona1 :</p><br>
-            <p class="user-message">Mensaje</p>
-        </div>
-        <div class="message-item">
-            <p class="user-name">Persona2 :</p><br>
-            <p class="user-message">Mensaje</p>
-        </div>
-        <div class="message-item server-message">
-            <p class="user-name">Persona1 :</p><br>
-            <p class="user-message">Mensaje</p>
-        </div>
-        <div class="message-item">
-            <p class="user-name">Persona2 :</p><br>
-            <p class="user-message">Mensaje</p>
-        </div>
-    </div> -->
+
     <div class="messages-container">
         @for (item of messages(); track $index) {
         <div class="message-item" [class.server-message]="userInfo?.user_name !== item.userName">

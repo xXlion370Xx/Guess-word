@@ -1,6 +1,6 @@
 .chat-container {
     width: 100%;
-    height: 100%;
+    height: 80%;
     justify-content: space-between;
     align-items: center;
     display: flex;
@@ -12,6 +12,15 @@ h2 {
     margin-top: 10px;
 }
 
+.msger-header {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px;
+    border-bottom: var(--border);
+    background: #eee;
+    color: #666;
+    }
+    
 .form-messages-container {
     /* background-color: black; */
     display: flex;
@@ -75,4 +84,62 @@ h2 {
 .button-send-message:hover {
     cursor: pointer;
     border: 1px #000 solid;
+}
+
+
+/* From Uiverse.io by alexmaracinaru */
+.cta {
+    position: relative;
+    margin: 5px;
+    padding: 12px 18px;
+    transition: all 0.2s ease;
+    border: none;
+    background: none;
+    cursor: pointer;
+}
+
+.cta:before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    display: block;
+    border-radius: 50px;
+    background: #43cea2;
+    width: 40px;
+    height: 40px;
+    transition: all 0.3s ease;
+}
+
+.cta span {
+    position: relative;
+    font-size: 15px;
+    letter-spacing: 0.05em;
+    color: #000000;
+}
+
+.cta svg {
+    position: relative;
+    top: 0;
+    margin-left: 10px;
+    fill: none;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    stroke: #000000;
+    stroke-width: 2;
+    transform: translateX(-5px);
+    transition: all 0.3s ease;
+}
+
+.cta:hover:before {
+    width: 100%;
+    background: linear-gradient(135deg, #43cea2, #185a9d);
+}
+
+.cta:hover svg {
+    transform: translateX(0);
+}
+
+.cta:active {
+    transform: scale(0.95);
 }

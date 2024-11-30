@@ -1,0 +1,15 @@
+
+   
+<h1>Palabra para dibujar: <u class="word">{{word}}</u></h1>
+<div class="drawing-container">
+    
+    <canvas #drawingCanvas
+            (mousedown)="onMouseDown($event)"
+            (mousemove)="onMouseMove($event)"
+            (mouseup)="onMouseUp()"
+            (mouseout)="onMouseOut()">
+    </canvas>
+    </div>
+      
+
+    

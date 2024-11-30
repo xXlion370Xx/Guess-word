@@ -5,11 +5,12 @@ import { PersonListComponent } from '../../components/person-list/person-list.co
 import { WebsocketService } from '../../../services/websocket.service';
 import { createRoomResponse } from '../../../model/CreateRoomResponse';
 import { StoreDataService } from '../../../services/store-data.service';
+import { CanvasComponent } from "../../components/canvas/canvas.component";
 
 @Component({
   selector: 'app-game-room',
   standalone: true,
-  imports: [GameChatComponent, PersonListComponent],
+  imports: [GameChatComponent, PersonListComponent, CanvasComponent],
   templateUrl: './game-room.component.html',
   styleUrl: './game-room.component.css'
 })

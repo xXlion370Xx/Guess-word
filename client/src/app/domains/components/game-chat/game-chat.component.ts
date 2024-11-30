@@ -3,7 +3,7 @@ import { messageModel } from '../../../model/messageModel';
 import { createRoomResponse } from '../../../model/CreateRoomResponse';
 import { FormControl, ReactiveFormsModule, Validators } from '@angular/forms';
 import { WebsocketService } from '../../../services/websocket.service';
-import { Console } from 'console';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-game-chat',
@@ -13,16 +13,20 @@ import { Console } from 'console';
   styleUrl: './game-chat.component.css'
 })
 export class GameChatComponent {
+
   @Input({ required: true }) userInfo: createRoomResponse | null = null;
   private webSocketService = inject(WebsocketService);
   socket: WebSocket | null = null;
   messages = signal<messageModel[]>([]);
   word = '';
+  private router = inject(Router);
+
 
   messageInputControl = new FormControl('', {
     nonNullable: true,
     validators: [Validators.required]
   })
+
 
   updateMessages(newMessage: messageModel) {
     this.messages.update((messages) => [...messages, newMessage])
@@ -33,17 +37,6 @@ export class GameChatComponent {
       this.socket = this.webSocketService.connectWS(this.userInfo.room_id, this.userInfo.user_name);
 
     }
-    this.webSocketService.getWord().subscribe({
-      next: (res) => {
-        this.word = res.random_word;
-      },
-      error: (err) => {
-        console.log("Something went wrong");
-        console.log(err);
-      }
-    });
-
-
 
     if (this.socket) {
       // Evento de apertura de conexión
@@ -78,7 +71,27 @@ export class GameChatComponent {
         console.error("Error en la conexión WebSocket:", error);
         alert("Ocurrió un error en la conexión WebSocket. Por favor, verifica la configuración.");
       };
+    } else {
+
+      this.router.navigate(['']);
+
     }
+
+  }
+
+  // Salir de sala
+  exit() {
+
+    if (this.socket) {
+
+      this.socket.close()
+      this.socket = null
+
+      this.router.navigate(['']);
+    }
+
+
+
   }
 
   sendMessage() {

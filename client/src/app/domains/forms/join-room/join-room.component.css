@@ -24,16 +24,112 @@ input {
     border: 1px solid #ccc;
 }
 
-.button-join-room {
-    font-family: "Fredoka", sans-serif;
-    font-size: 1rem;
+/* From Uiverse.io by alexmaracinaru */
+.cta {
+    position: relative;
+    margin: auto;
+    padding: 12px 18px;
+    transition: all 0.2s ease;
     border: none;
-    background-color: #43cea2;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    background: none;
+    cursor: pointer;
+}
+
+.cta:before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    display: block;
+    border-radius: 50px;
+    background: #43cea2;
+    width: 40px;
     height: 40px;
-    width: 60%;
-    border-radius: 15px;
-    align-self: center;
+    transition: all 0.3s ease;
+}
+
+.cta span {
+    position: relative;
+    font-size: 15px;
+    letter-spacing: 0.05em;
+    color: #000000;
+}
+
+.cta svg {
+    position: relative;
+    top: 0;
+    margin-left: 10px;
+    fill: none;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    stroke: #000000;
+    stroke-width: 2;
+    transform: translateX(-5px);
+    transition: all 0.3s ease;
+}
+
+.cta:hover:before {
+    width: 100%;
+    background: linear-gradient(135deg, #43cea2, #185a9d);
+}
+
+.cta:hover svg {
+    transform: translateX(0);
+}
+
+.cta:active {
+    transform: scale(0.95);
+}
+
+/* From Uiverse.io by Jaareet */
+.input {
+    color: #000000;
+    background-color: rgb(255, 255, 255);
+    box-shadow: 0 0 .4vw rgba(204, 198, 198, 0.5), 0 0 0 .15vw transparent;
+    border-radius: 0.4vw;
+    border: none;
+    outline: none;
+    margin: 10px 0;
+    padding: 10px;
+    max-width: 190px;
+    transition: .4s;
+}
+
+.input:hover {
+    box-shadow: 0 0 0 .15vw rgb(67, 206, 162);
+}
+
+.input:focus {
+    box-shadow: 0 0 0 .15vw rgb(67, 206, 162);
+}
+
+/* From Uiverse.io by andrew-demchenk0 */
+.info {
+    width: 250px;
+    height: 10px;
+    padding: 10px;
+    margin: 10px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: start;
+    background: linear-gradient(135deg, #43cea2, #185a9d);
+    border-radius: 8px;
+    box-shadow: 0px 0px 5px -3px #111;
+}
+
+.info__icon {
+    width: 20px;
+    height: 20px;
+    transform: translateY(-2px);
+    margin-right: 8px;
+}
+
+.info__icon path {
+    fill: #f8f8f8;
+}
+
+.info__title {
+    font-size: 14px;
+    color: #0a0a0a;
 }

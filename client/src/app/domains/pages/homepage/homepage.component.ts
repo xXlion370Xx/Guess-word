@@ -1,6 +1,6 @@
 import { Component, inject } from '@angular/core';
-import { CreateRoomComponent } from '../../forms/create-room/create-room.component';
-import { JoinRoomComponent } from '../../forms/join-room/join-room.component';
+import { CreateRoomComponent } from '../../components/forms/create-room/create-room.component';
+import { JoinRoomComponent } from '../../components/forms/join-room/join-room.component';
 import { Title } from '@angular/platform-browser';
 
 @Component({

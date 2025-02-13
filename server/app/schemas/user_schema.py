@@ -1,15 +1,16 @@
 from pydantic import BaseModel, Field
 from typing import Optional
 
-class CreateModel(BaseModel):
-    nickname :  str
+class UserInfoModel(BaseModel):
+    user_name :  str
     owner     :  Optional[bool] = Field(default=True) 
+    room_id   :  Optional[str] = Field(default=None)
 
     model_config  ={
         "json_schema_extra":{
             "examples":[
                 {
-                    "nickname":"Example Name"
+                    "user_name":"Example Name"
                 }
             ]
         }

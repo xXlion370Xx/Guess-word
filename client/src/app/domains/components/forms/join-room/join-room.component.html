@@ -1,8 +1,8 @@
 <div class="container-join-room">
 
-  @if (nickName().invalid && nickName().touched || code().invalid && code().touched ) {
+  @if (nickName().invalid && nickName().touched || roomId().invalid && roomId().touched ) {
   <div style="margin: 10px;">
-    @if (nickName().hasError('required') || code().hasError('required')) {
+    @if (nickName().hasError('required') || roomId().hasError('required')) {
     <div class="info">
       <div class="info__icon">
         <svg fill="none" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
@@ -42,7 +42,7 @@
 
     <!-- Campo de código -->
     <label for="codigo">Código:</label>
-    <input [formControl]="code()" type="text" id="codigo" class="input" placeholder="Introduce un código" required>
+    <input [formControl]="roomId()" type="text" id="codigo" class="input" placeholder="Introduce un código" required>
 
     <!-- Botón para unirse a la sala -->
     <button class="cta" type="submit">

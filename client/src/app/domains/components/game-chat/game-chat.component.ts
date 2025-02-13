@@ -1,9 +1,9 @@
 import { Component, inject, Input, signal } from '@angular/core';
 import { messageModel } from '../../../model/messageModel';
-import { createRoomResponse } from '../../../model/CreateRoomResponse';
 import { FormControl, ReactiveFormsModule, Validators } from '@angular/forms';
 import { WebsocketService } from '../../../services/websocket.service';
 import { Router } from '@angular/router';
+import { UserInfo } from '../../../model/UserInfo';
 
 @Component({
   selector: 'app-game-chat',
@@ -14,7 +14,7 @@ import { Router } from '@angular/router';
 })
 export class GameChatComponent {
 
-  @Input({ required: true }) userInfo: createRoomResponse | null = null;
+  @Input({ required: true }) userInfo: UserInfo | null = null;
   private webSocketService = inject(WebsocketService);
   socket: WebSocket | null = null;
   messages = signal<messageModel[]>([]);
@@ -27,7 +27,6 @@ export class GameChatComponent {
     validators: [Validators.required]
   })
 
-
   updateMessages(newMessage: messageModel) {
     this.messages.update((messages) => [...messages, newMessage])
   }
@@ -35,7 +34,6 @@ export class GameChatComponent {
   ngOnInit() {
     if (this.userInfo) {
       this.socket = this.webSocketService.connectWS(this.userInfo.room_id, this.userInfo.user_name);
-
     }
 
     if (this.socket) {
@@ -72,26 +70,18 @@ export class GameChatComponent {
         alert("Ocurrió un error en la conexión WebSocket. Por favor, verifica la configuración.");
       };
     } else {
-
       this.router.navigate(['']);
-
     }
-
   }
 
   // Salir de sala
   exit() {
-
     if (this.socket) {
 
       this.socket.close()
       this.socket = null
-
       this.router.navigate(['']);
     }
-
-
-
   }
 
   sendMessage() {

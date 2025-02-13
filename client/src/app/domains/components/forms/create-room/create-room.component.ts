@@ -1,8 +1,9 @@
 import { Component, inject, signal } from '@angular/core';
-import { CreateRoomService } from '../../../services/create-room.service';
+import { CreateRoomService } from '../../../../services/create-room.service';
 import { FormControl, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { StoreDataService } from '../../../services/store-data.service';
+import { StoreDataService } from '../../../../services/store-data.service';
+import { UserInfo } from '../../../../model/UserInfo';
 // Importa el CommonModule
 
 @Component({
@@ -13,9 +14,9 @@ import { StoreDataService } from '../../../services/store-data.service';
   styleUrl: './create-room.component.css'
 })
 export class CreateRoomComponent {
-  private createRoomService = inject(CreateRoomService);
-  private router = inject(Router);
-  private storeDataService = inject(StoreDataService);
+  readonly createRoomService = inject(CreateRoomService);
+  readonly router = inject(Router);
+  readonly storeDataService = inject(StoreDataService);
   nickNameControl = signal(new FormControl('', {
     nonNullable: true,
     validators: [Validators.required,
@@ -33,7 +34,13 @@ export class CreateRoomComponent {
 
     this.createRoomService.createRoom(this.nickNameControl().value).subscribe({
       next: (res) => {
-        this.storeDataService.updateRoomData(res);
+        const UserInfo: UserInfo = {
+          user_name: this.nickNameControl().value,
+          room_id: res.room_id,
+          owner: true
+        }
+
+        this.storeDataService.updateRoomData(UserInfo);
         this.router.navigate(['game', res.room_id]);
       },
       error: (err) => {
@@ -44,4 +51,4 @@ export class CreateRoomComponent {
   }
 
 
-}  
+}

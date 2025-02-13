@@ -3,9 +3,10 @@ import { ActivatedRoute } from '@angular/router';
 import { GameChatComponent } from '../../components/game-chat/game-chat.component';
 import { PersonListComponent } from '../../components/person-list/person-list.component';
 import { WebsocketService } from '../../../services/websocket.service';
-import { createRoomResponse } from '../../../model/CreateRoomResponse';
+import { CreateRoomResponse } from '../../../model/CreateRoomResponse';
 import { StoreDataService } from '../../../services/store-data.service';
 import { CanvasComponent } from "../../components/canvas/canvas.component";
+import { UserInfo } from '../../../model/UserInfo';
 
 @Component({
   selector: 'app-game-room',
@@ -15,8 +16,8 @@ import { CanvasComponent } from "../../components/canvas/canvas.component";
   styleUrl: './game-room.component.css'
 })
 export class GameRoomComponent {
-  private storeService = inject(StoreDataService)
-  userInfo: createRoomResponse | null = null;
+  readonly storeService = inject(StoreDataService)
+  userInfo: UserInfo | null = null;
 
   ngOnInit() {
     this.storeService.currentRoomData.subscribe((data) => {

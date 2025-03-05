@@ -1,15 +1,17 @@
-
-   
 <h1>Palabra para dibujar: <u class="word">{{word}}</u></h1>
-<div class="drawing-container">
-    
-    <canvas #drawingCanvas
-            (mousedown)="onMouseDown($event)"
-            (mousemove)="onMouseMove($event)"
-            (mouseup)="onMouseUp()"
-            (mouseout)="onMouseOut()">
-    </canvas>
-    </div>
-      
 
-    
+<div class="canvas-container">
+        <div class="toolbar">
+                <label for="stroke">Color:</label>
+                <input id="stroke" type="color" [(ngModel)]="strokeColor">
+
+                <label for="lineWidth">Grosor:</label>
+                <input id="lineWidth" type="number" [(ngModel)]="lineWidth" min="1" max="20">
+
+                <button class="clear-button" (click)="clearCanvas()">Borrar</button>
+        </div>
+
+        <canvas #drawingCanvas (mousedown)="onMouseDown($event)" (mousemove)="onMouseMove($event)"
+                (mouseup)="onMouseUp()" (mouseout)="onMouseOut()">
+        </canvas>
+</div>

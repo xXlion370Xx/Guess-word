@@ -30,7 +30,15 @@ class ConnectionWebSocketManager:
         if room_id in self._room_connections:
             print(self._room_connections[room_id])
             for connection in self._room_connections[room_id]:
-                await connection.send_text(json.dumps({"user_name": user_name, "message": message}))
+                if isinstance(connection, WebSocket): 
+                    await connection.send_text(json.dumps({"type": "message","user_name": user_name, "message": message}))
+
+
+    async def send_drawing(self, user_name: str, room_id: str, drawing_data: dict):
+        if room_id in self._room_connections:
+            for connection in self._room_connections[room_id]:
+                if isinstance(connection, WebSocket):
+                    await connection.send_text(json.dumps({"type": "drawing", "user_name": user_name, "data": drawing_data}))
                 
     @property
     def room_connections(self):

@@ -8,6 +8,7 @@ import DefaultResponse from '../model/DefaultResponse';
 })
 export class WebsocketService {
   private http = inject(HttpClient);
+  private socket: WebSocket | null = null;
 
   validateWs() {
     const url = `http://localhost:8000/get_active_rooms`;
@@ -22,15 +23,22 @@ export class WebsocketService {
   }
 
   connectWS(roomId: string, nameUser: string) {
-    const url = `ws://127.0.0.1:8000/ws/${roomId}/${nameUser}`;
+    if (!this.socket || this.socket.readyState !== WebSocket.OPEN) {
 
-    return new WebSocket(url);
+      this.socket = new WebSocket(`ws://127.0.0.1:8000/ws/${roomId}/${nameUser}`);
+    }
+
+    return this.socket;
   }
 
   getRoomInfo(roomId: string) {
     const url = `http://localhost:8000/get_room_info/${roomId}`;
 
     return this.http.get<DefaultResponse>(url);
+  }
+
+  getSocket() {
+    return this.socket;
   }
 
 }

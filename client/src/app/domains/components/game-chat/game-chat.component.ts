@@ -1,4 +1,4 @@
-import { Component, inject, Input, signal } from '@angular/core';
+import { Component, inject, Input, signal, ViewChild, ElementRef } from '@angular/core';
 import { messageModel } from '../../../model/messageModel';
 import { FormControl, ReactiveFormsModule, Validators } from '@angular/forms';
 import { WebsocketService } from '../../../services/websocket.service';
@@ -13,23 +13,18 @@ import { UserInfo } from '../../../model/UserInfo';
   styleUrl: './game-chat.component.css'
 })
 export class GameChatComponent {
-
   @Input({ required: true }) userInfo: UserInfo | null = null;
   private webSocketService = inject(WebsocketService);
-  socket: WebSocket | null = null;
-  messages = signal<messageModel[]>([]);
-  word = '';
   private router = inject(Router);
 
+  @ViewChild('messagesContainer') private messagesContainer!: ElementRef;
 
+  socket: WebSocket | null = null;
+  messages = signal<messageModel[]>([]);
   messageInputControl = new FormControl('', {
     nonNullable: true,
     validators: [Validators.required]
-  })
-
-  updateMessages(newMessage: messageModel) {
-    this.messages.update((messages) => [...messages, newMessage])
-  }
+  });
 
   ngOnInit() {
     if (this.userInfo) {
@@ -37,56 +32,60 @@ export class GameChatComponent {
     }
 
     if (this.socket) {
-      // Evento de apertura de conexión
-      this.socket.onopen = function (event) {
-        console.log("Conectado al servidor WebSocket.");
-      };
-
-      // Evento de recepción de mensaje
       this.socket.onmessage = (event) => {
-        console.log("Receiving message");
-        console.log(event.data);
+        console.log("Receiving message", event.data);
 
         const reqMessage = JSON.parse(event.data);
-        console.log(reqMessage);
-        const newMessage: messageModel = {
-          "userName": reqMessage.user_name,
-          "messsage": reqMessage.message,
-          "owner": false
+        if (reqMessage.type === "message") {
+          const newMessage: messageModel = {
+            "type": reqMessage.type,
+            "userName": reqMessage.user_name,
+            "messsage": reqMessage.message,
+            "owner": false
+          };
+
+          this.updateMessages(newMessage);
         }
-
-        this.updateMessages(newMessage);
       };
 
-      // Evento de cierre de conexión
-      // Se cierra la conexion pero no se envia ningun dato al backend informando de este cierre
-      this.socket.onclose = (event) => {
-        console.log("Conexión cerrada.");
-      };
-
-      // Evento de error de conexión
-      this.socket.onerror = (error) => {
-        console.error("Error en la conexión WebSocket:", error);
-        alert("Ocurrió un error en la conexión WebSocket. Por favor, verifica la configuración.");
-      };
+      this.socket.onclose = () => console.log("Conexión cerrada.");
+      this.socket.onerror = (error) => console.error("Error en WebSocket:", error);
     } else {
       this.router.navigate(['']);
     }
   }
 
-  // Salir de sala
-  exit() {
-    if (this.socket) {
+  updateMessages(newMessage: messageModel) {
+    this.messages.update((messages) => [...messages, newMessage]);
+  }
 
-      this.socket.close()
-      this.socket = null
-      this.router.navigate(['']);
+  ngAfterViewChecked() {
+    this.scrollToBottom();
+  }
+
+  scrollToBottom(): void {
+    try {
+      this.messagesContainer.nativeElement.scrollTop = this.messagesContainer.nativeElement.scrollHeight;
+    } catch (err) {
+      console.error('Error al hacer scroll:', err);
     }
   }
 
   sendMessage() {
+    if (this.socket && this.messageInputControl.value.trim()) {
+      this.socket.send(JSON.stringify({
+        type: "message",
+        message: this.messageInputControl.value
+      }));
+      this.messageInputControl.setValue('');
+    }
+  }
+
+  exit() {
     if (this.socket) {
-      this.socket?.send(this.messageInputControl.value);
+      this.socket.close();
+      this.socket = null;
+      this.router.navigate(['']);
     }
   }
 }

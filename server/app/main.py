@@ -1,3 +1,4 @@
+import json
 from fastapi import FastAPI, WebSocket, WebSocketDisconnect, Body
 from fastapi.responses import JSONResponse
 from services import ConnectionWebSocketManager, CodeGeneratorManager
@@ -40,7 +41,14 @@ async def websocket_endpoint(websocket: WebSocket, room_id: str, user:str ):
         while True:
             try:
                 data = await websocket.receive_text()
-                await ObjConnectWS.send_message(user, data, room_id)
+                message = json.loads(data)
+
+                if message["type"] == "message":
+                    await ObjConnectWS.send_message(user, message["message"], room_id)
+
+                elif message["type"] == "drawing":
+                    await ObjConnectWS.send_drawing(user, room_id, message["drawing_data"])
+                
 
             except WebSocketDisconnect:
                 print(f"user_name {user} disconnected from room {room_id}")

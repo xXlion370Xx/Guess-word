@@ -19,8 +19,8 @@ h2 {
     border-bottom: var(--border);
     background: #eee;
     color: #666;
-    }
-    
+}
+
 .form-messages-container {
     /* background-color: black; */
     display: flex;
@@ -64,27 +64,52 @@ h2 {
 
 .input-message {
     flex-grow: 1;
-    border-radius: 10px;
-    border: none;
-    text-align: center;
-}
-
-.input-message:hover {
-    border: 1px #000 solid;
-}
-
-.button-send-message {
-    background-color: #43cea2;
-    border: none;
-    border-radius: 15px;
+    /* border-radius: 10px; */
+    border: 1px solid #ccc;
+    padding: 20px 16px;
     font-size: 16px;
-    width: 20%;
+    text-align: left;
+    outline: none;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+    width: 100%;
+    max-width: 150%;
+    /* Ajusta el tamaño máximo */
+}
+
+.input-message:hover,
+.input-message:focus {
+    border-color: #43cea2;
+    box-shadow: 0px 0px 8px rgba(67, 206, 162, 0.6);
+}
+
+/* Estilos mejorados del botón */
+.button-send-message {
+    background: linear-gradient(135deg, #43cea2, #185a9d);
+    border: none;
+    /* border-radius: 25px; */
+    font-size: 16px;
+    padding: 20px 20px;
+    color: white;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    width: 120px;
+    /* Ancho fijo para mejor apariencia */
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .button-send-message:hover {
-    cursor: pointer;
-    border: 1px #000 solid;
+    background: linear-gradient(135deg, #36b48b, #0e3c6e);
+    transform: scale(1.05);
 }
+
+.button-send-message:active {
+    transform: scale(0.95);
+}
+
 
 
 /* From Uiverse.io by alexmaracinaru */
@@ -142,4 +167,27 @@ h2 {
 
 .cta:active {
     transform: scale(0.95);
+}
+
+/* Personalización para navegadores WebKit (Chrome, Edge, Safari) */
+.messages-container::-webkit-scrollbar {
+    width: 6px;
+    /* Grosor del scroll */
+}
+
+.messages-container::-webkit-scrollbar-track {
+    background: #eafaf1;
+    /* Color de fondo del track */
+    border-radius: 10px;
+}
+
+.messages-container::-webkit-scrollbar-thumb {
+    background: linear-gradient(135deg, #43cea2, #185a9d);
+    /* Color verdoso */
+    border-radius: 10px;
+}
+
+.messages-container::-webkit-scrollbar-thumb:hover {
+    background: linear-gradient(135deg, #36b48b, #0e3c6e);
+    /* Cambio de color al pasar el mouse */
 }
